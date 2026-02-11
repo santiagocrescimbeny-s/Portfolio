@@ -3,26 +3,30 @@
 interface Props {
   videoPath?: string;
   posterImage?: string;
+  useGradient?: boolean;
 }
 
 const { 
   videoPath = '/videos/background.mp4',
-  posterImage = '/images/poster.jpg'
+  posterImage = '/images/poster.jpg',
+  useGradient = true  // Por defecto usar gradiente habiendo no hay video
 } = Astro.props;
 ---
 
-<div class="background-video-container">
-  <video
-    class="background-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    poster={posterImage}
-  >
-    <source src={videoPath} type="video/mp4" />
-    Tu navegador no soporta videos HTML5
-  </video>
+<div class="background-video-container" class:list={{ 'gradient-fallback': useGradient }}>
+  {!useGradient && (
+    <video
+      class="background-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster={posterImage}
+    >
+      <source src={videoPath} type="video/mp4" />
+      Tu navegador no soporta videos HTML5
+    </video>
+  )}
   <div class="video-overlay"></div>
 </div>
 
@@ -32,9 +36,15 @@ const {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
     z-index: -1;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+  }
+
+  /* Cuando se usa gradiente como fallback */
+  .background-video-container.gradient-fallback {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
   }
 
   .background-video {
@@ -47,6 +57,7 @@ const {
     height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    display: block;
   }
 
   .video-overlay {
@@ -55,25 +66,27 @@ const {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
 
   @media (max-width: 768px) {
-    .background-video {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  /* Para dispositivos pequeños, optimizar rendimiento */
-  @media (max-width: 480px) {
     .background-video-container {
-      background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
 
     .background-video {
       display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .background-video {
+      display: none;
+    }
+
+    .background-video-container {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
     }
   }
 </style>
