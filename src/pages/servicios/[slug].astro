@@ -1,0 +1,180 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+// Para usar Content Collections descomenta esto:
+// import { getCollection } from 'astro:content';
+// const services = await getCollection('services');
+// export async function getStaticPaths() {
+//   const services = await getCollection('services');
+//   return services.map((entry) => ({
+//     params: { slug: entry.slug },
+//     props: { entry },
+//   }));
+// }
+
+// Por ahora, ejemplo estático:
+const slug = Astro.params.slug;
+
+const serviceDetails = {
+  'desarrollo-web': {
+    title: 'Desarrollo Web',
+    description: 'Creamos sitios web modernos, rápidos y escalables',
+    fullContent: `
+      Utilizo las tecnologías más actuales para crear aplicaciones web que no solo se ven bien,
+      sino que funcionan perfectamente. Desde landing pages hasta aplicaciones complejas con backend.
+    `,
+    technologies: ['Astro', 'React', 'Node.js', 'TypeScript', 'Tailwind CSS'],
+    price: 'Desde $1000',
+  },
+  'diseño': {
+    title: 'Diseño UI/UX',
+    description: 'Interfaces intuitivas que deleitan a los usuarios',
+    fullContent: `
+      El diseño no es solo bonito, debe ser funcional. Creo interfaces que mejoran la experiencia
+      del usuario y aumentan la conversión de tu sitio.
+    `,
+    technologies: ['Figma', 'Adobe XD', 'Prototyping', 'User Research'],
+    price: 'Desde $800',
+  },
+  'seo': {
+    title: 'Optimización SEO',
+    description: 'Posiciona tu sitio en Google',
+    fullContent: `
+      SEO es fundamental para que tu sitio sea encontrado. Aplicamos estrategias comprobadas
+      de On-Page y Off-Page para mejorar tu ranking.
+    `,
+    technologies: ['Google Analytics', 'SEMrush', 'Technical SEO', 'Content Strategy'],
+    price: 'Desde $500/mes',
+  },
+  'consultoria': {
+    title: 'Consultoría Digital',
+    description: 'Estrategia para tu transformación digital',
+    fullContent: `
+      Ayudo a empresas a entender el panorama digital y a definir estrategias efectivas
+      de tecnología y marketing.
+    `,
+    technologies: ['Estrategia Digital', 'Análisis de Mercado', 'Roadmap Técnico'],
+    price: 'A consultar',
+  },
+};
+
+const service = serviceDetails[slug] || { title: 'Servicio no encontrado', description: '', fullContent: '', technologies: [], price: '' };
+---
+
+<MainLayout title={`${service.title} | Mi Portafolio`} description={service.description}>
+  <article class="service-detail">
+    <h1>{service.title}</h1>
+    <p class="description">{service.description}</p>
+    
+    <div class="content-box">
+      <h2>Detalles</h2>
+      <p>{service.fullContent}</p>
+    </div>
+
+    <div class="technologies">
+      <h2>Tecnologías</h2>
+      <ul>
+        {service.technologies.map((tech) => (
+          <li>{tech}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="pricing">
+      <h2>Inversión</h2>
+      <p class="price">{service.price}</p>
+      <a href="/contacto/" class="contact-button">Solicitar Presupuesto</a>
+    </div>
+
+    <a href="/" class="back-link">← Volver al inicio</a>
+  </article>
+</MainLayout>
+
+<style>
+  .service-detail {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+  }
+
+  h1 {
+    color: #667eea;
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 2rem;
+  }
+
+  .content-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .content-box p {
+    line-height: 1.8;
+  }
+
+  .technologies {
+    margin: 2rem 0;
+  }
+
+  .technologies ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .technologies li {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+
+  .pricing {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .price {
+    font-size: 2rem;
+    color: #667eea;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .contact-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s;
+    margin-top: 1rem;
+  }
+
+  .contact-button:hover {
+    transform: scale(1.05);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #667eea;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>

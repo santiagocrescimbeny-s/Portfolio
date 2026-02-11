@@ -1,0 +1,127 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+
+// Aquí puedes importar contenido de tus servicios si usas Content Collections
+// import { getCollection } from 'astro:content';
+// const services = await getCollection('services');
+---
+
+<MainLayout title="Mi Portafolio - Inicio" description="Landing principal con resumen de servicios">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bienvenido a Mi Portafolio</h1>
+      <p>Desarrollador de Soluciones Web Creativas</p>
+      <a href="#servicios" class="cta-button">Ver Servicios</a>
+    </div>
+  </section>
+
+  <section id="servicios" class="services-section">
+    <h2>Mis Servicios</h2>
+    <div class="services-grid">
+      <ServiceCard
+        title="Desarrollo Web"
+        description="Sitios web modernos y responsivos con tecnología de punta"
+        icon="💻"
+        slug="desarrollo-web"
+      />
+      <ServiceCard
+        title="Diseño UI/UX"
+        description="Interfaces atractivas y experiencias de usuario excepcionales"
+        icon="🎨"
+        slug="diseño"
+      />
+      <ServiceCard
+        title="Optimización SEO"
+        description="Posiciona tu sitio en los primeros resultados de búsqueda"
+        icon="🔍"
+        slug="seo"
+      />
+      <ServiceCard
+        title="Consultoría Digital"
+        description="Estrategia y asesoramiento para tu transformación digital"
+        icon="💡"
+        slug="consultoria"
+      />
+    </div>
+  </section>
+
+  <section class="about-section">
+    <h2>Sobre Mí</h2>
+    <p>
+      Soy un desarrollador apasionado por crear soluciones digitales innovadoras.
+      Con experiencia en múltiples tecnologías, me dedico a transformar ideas en
+      productos reales que generan impacto.
+    </p>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    color: #667eea;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s;
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+
+  .services-section {
+    margin: 3rem 0;
+  }
+
+  .services-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .about-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 3rem;
+  }
+
+  .about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+</style>

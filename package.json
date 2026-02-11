@@ -1,0 +1,29 @@
+{
+  "name": "mi-portafolio",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Portafolio personal creado con Astro",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [
+    "astro",
+    "portfolio",
+    "web"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@astrojs/react": "^3.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  }
+}
