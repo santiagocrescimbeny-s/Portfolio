@@ -2,6 +2,7 @@
 // Plantilla base que envuelve todas las páginas
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BackgroundVideo from '../components/BackgroundVideo.astro';
 
 interface Props {
   title?: string;
@@ -21,6 +22,7 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
     <title>{title}</title>
   </head>
   <body>
+    <BackgroundVideo videoPath="/videos/background.mp4" />
     <Header />
     <main class="main-content">
       <slot />
@@ -38,12 +40,13 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
 
   html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0a0a0a;
     color: #fff;
   }
 
   body {
     line-height: 1.6;
+    background: #0a0a0a;
+    position: relative;
   }
 
   .main-content {
@@ -51,6 +54,8 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    position: relative;
+    z-index: 10;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -68,5 +73,16 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
 
   button {
     cursor: pointer;
+  }
+
+  /* Asegurar que Header y Footer estén por encima del video */
+  header {
+    position: relative;
+    z-index: 20;
+  }
+
+  footer {
+    position: relative;
+    z-index: 20;
   }
 </style>
