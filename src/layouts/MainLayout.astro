@@ -22,14 +22,14 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
     <title>{title}</title>
   </head>
   <body>
-    <!-- Componente de video de fondo (usa gradiente como fallback por defecto) -->
     <BackgroundVideo videoPath="/videos/background.mp4" useGradient={true} />
-    
-    <Header />
-    <main class="main-content">
-      <slot />
-    </main>
-    <Footer />
+    <div class="page-content">
+      <Header />
+      <main class="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
 
@@ -57,13 +57,22 @@ const { title = 'Mi Portafolio', description = 'Bienvenido a mi portafolio' } = 
     position: relative;
   }
 
+  .page-content {
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   .main-content {
-    min-height: calc(100vh - 200px);
+    flex: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
     position: relative;
     z-index: 10;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
